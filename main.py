@@ -1,9 +1,11 @@
 import datetime
-
 from flask import Flask, render_template
+
 
 app = Flask(__name__)
 
+
+ ## Routes go here
 
 @app.route("/")
 def root():
@@ -17,6 +19,14 @@ def root():
 
     return render_template("index.html", times=dummy_times)
 
+
+
+
+
+
+
+
+## Run the thing
 
 if __name__ == "__main__":
     # This is used when running locally only. When deploying to Google App

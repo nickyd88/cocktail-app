@@ -29,6 +29,9 @@ MANIFEST
 # Random
 .DS_Store
 instructions.txt
+.gcloudignore
+
+
 
 # PyInstaller
 #  Usually these files are written by a python script from a template

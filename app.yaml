@@ -12,8 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-runtime: python39
+runtime: python312
 #should this be python 312 for 3.12????
+
+entrypoint: gunicorn -b :$PORT main:app
 
 handlers:
   # This configures Google App Engine to serve the files in the app's static
@@ -26,3 +28,5 @@ handlers:
   # the entire handlers section) when there are no static files defined.
 - url: /.*
   script: auto
+
+
