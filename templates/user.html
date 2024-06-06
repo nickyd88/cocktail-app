@@ -12,17 +12,17 @@
         <div>
           
           {% if result.stocked %} 
-          <input type="checkbox" id="{{ingredient}}" name="{{ingredient}}" checked/>
+          <input type="checkbox" id="{{ingredient}}" name="{{ingredient|safe}}" checked/>
           <label for="{{ingredient}}">{{ingredient}}</label>
           {% else %}
-          <input type="checkbox" id="{{ingredient}}" name="{{ingredient}}"/>
+          <input type="checkbox" id="{{ingredient}}" name="{{ingredient|safe}}"/>
           <label for="{{ingredient}}">{{ingredient}}</label>
           {% endif %}
 
           {% if result.notes == '' %}
-          <input type="text" id="{{ingredient}}.notes" name="{{ingredient}}.notes" placeholder="Details/brands/notes" maxlength='50' size="35">
+          <input type="text" id="{{ingredient}}.notes" name="{{ingredient|safe}}.notes" placeholder="Details/brands/notes" maxlength='50' size="35">
           {% else %}
-          <input type="text" id="{{ingredient}}.notes" name="{{ingredient}}.notes" value="{{result.notes}}" maxlength='50' size="35">
+          <input type="text" id="{{ingredient}}.notes" name="{{ingredient|safe}}.notes" value="{{result.notes|safe}}" maxlength='50' size="35">
           {% endif %}
 
         </div>

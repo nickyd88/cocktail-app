@@ -35,7 +35,7 @@ class User(UserMixin):
 
 ingredients_test = ['Amaro', 'Aperol', 'Campari', 'Benedictine']
 
-ingredients_family = [
+all_ingredients= [
     'Whiskey',
     'Scotch Whiskey',
     'Bourbon Whiskey',
@@ -119,7 +119,7 @@ ingredients_family = [
 
 # Generate list of ingredients
 def getIngredients():
-    return ingredients_test
+    return all_ingredients
 
 # generate dictionary of ingredients for datastore
 def createStockDictionary():

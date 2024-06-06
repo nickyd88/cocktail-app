@@ -72,16 +72,22 @@ def userpage():
             if i.endswith('.notes'):
                 if formdict[i] != '':
                     stock[i[:-6]]['notes'] = formdict[i]
+                else:
+                    stock[i[:-6]]['notes'] = ''
 
         updateStock(current_user.username, stock)
 
-        stocked = []
-        notes = []
+        sorted_stock = {}
+        for item in getIngredients():
+            sorted_stock[item] = stock[item]
 
-        return render_template('user.html', user=current_user, stock = stock)
+        return render_template('user.html', user=current_user, stock = sorted_stock)
 
     else:
-        return render_template('user.html', user=current_user, stock = stock)
+        sorted_stock = {}
+        for item in getIngredients():
+            sorted_stock[item] = stock[item]
+        return render_template('user.html', user=current_user, stock = sorted_stock)
 
 
 @app.route("/logout")
