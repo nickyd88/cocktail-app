@@ -29,49 +29,47 @@ nav ul li a:hover {
   text-decoration: underline;
 }
 
+/* Styles for Login Container */
 .container {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 300px;
-  text-align: left;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center; /* Center the content */
 }
 
-h1 {
-  margin-bottom: 20px;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-label {
-  font-size: 16px;
+.container h3 {
+  font-size: 1.5em;
+  font-weight: bold;
   margin-bottom: 5px;
 }
 
-select, button {
-  width: 100%;
-  max-width: 250px;
-  padding: 10px;
-  border: 1px solid #ccc;
+.container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center form elements horizontally */
+}
+
+.container select {
+  width: 100%; /* Make select dropdown full width */
+  max-width: 200px; /* Set maximum width */
+  margin-bottom: 10px; /* Add some spacing between select dropdown and button */
+  font-size:18px;
+  padding: 5px;
+}
+
+.container button {
+  padding: 8px 10px;
+  border: 1px solid #4CAF50;
   border-radius: 4px;
-}
-
-button {
-  background-color: #007BFF;
+  background-color: #4CAF50;
   color: white;
-  border: none;
+  font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-button:hover {
-  background-color: #0056b3;
+.container button:hover {
+  background-color: #45a049;
 }
-
 p {
   margin-top: 20px;
   font-size: 18px;
@@ -173,11 +171,7 @@ legend {
   margin-bottom: 10px;
 }
 
-div {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
+
 
 input[type="checkbox"] {
   margin-right: 10px;
@@ -217,6 +211,7 @@ button.execute {
 button.execute:hover {
   background-color: #45a049;
 }
+
 header {
   text-align: center;
   margin-bottom: 20px;

@@ -7,15 +7,18 @@
 <h1>Home</h1>
 
 <div class="container">
-<h3>Select User</h3>
-<form action="" method="post">
+    <h2>Select User</h2>
+    <div>
+
+    <form action="" method="post">
     <select name="username">
         {% for user in userlist[0:] %}
         <option value="{{user}}">{{user}}</option>
         {% endfor %}
     </select>
     <button class="button execute" name="submit" value="submit">Submit</button>
-</form>
+    </form>
+    </div>
 </div>
     
 {% endblock %}
