@@ -15,7 +15,7 @@
 runtime: python312
 #should this be python 312 for 3.12????
 
-entrypoint: gunicorn -b :$PORT main:app
+#entrypoint: gunicorn -b :$PORT main:app
 
 handlers:
   # This configures Google App Engine to serve the files in the app's static

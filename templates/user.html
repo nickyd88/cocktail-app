@@ -8,13 +8,23 @@
         <fieldset>
         <legend>Edit Stock:</legend>
     
-        {% for ingredient in ingredient_list %}
-
+        {% for ingredient, result in stock.items() %}
         <div>
+          
+          {% if result.stocked %} 
+          <input type="checkbox" id="{{ingredient}}" name="{{ingredient}}" checked/>
+          <label for="{{ingredient}}">{{ingredient}}</label>
+          {% else %}
           <input type="checkbox" id="{{ingredient}}" name="{{ingredient}}"/>
           <label for="{{ingredient}}">{{ingredient}}</label>
-          <input type="text" id="{{ingredient}}.notes" name="{{ingredient}}.notes" placeholder="Details/brands/notes"
-           maxlength='50' size="35">
+          {% endif %}
+
+          {% if result.notes == '' %}
+          <input type="text" id="{{ingredient}}.notes" name="{{ingredient}}.notes" placeholder="Details/brands/notes" maxlength='50' size="35">
+          {% else %}
+          <input type="text" id="{{ingredient}}.notes" name="{{ingredient}}.notes" value="{{result.notes}}" maxlength='50' size="35">
+          {% endif %}
+
         </div>
       
         {% endfor %}

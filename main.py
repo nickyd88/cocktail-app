@@ -5,9 +5,10 @@ from google.cloud import datastore
 import google.oauth2.id_token
 from data_functions import store_time, fetch_times, getUsers, User
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
-from data_functions import getIngredients
+from data_functions import getIngredients, getStock, createStockDictionary, deleteStock, entityJson, updateStock
 from config import Config
 import copy
+import json
 
 app = Flask(__name__)
 
@@ -58,25 +59,29 @@ def login():
 @login_required
 def userpage():
 
-    ingredients = {}
-    for i in getIngredients():
-        ingredients[i] = {'stocked': False, 'notes': ''}
+    stock = getStock(current_user.username)
 
     if request.method == 'POST':
         formdict = request.form.to_dict()
+        for i in stock.keys():
+            if i in formdict.keys():
+                stock[i]['stocked'] = True
+            else:
+                stock[i]['stocked'] = False
         for i in formdict.keys():
-            if i in ingredients.keys():
-                ingredients[i]['stocked'] = True
             if i.endswith('.notes'):
                 if formdict[i] != '':
-                    ingredients[i[:-6]]['notes'] = formdict[i]
+                    stock[i[:-6]]['notes'] = formdict[i]
 
+        updateStock(current_user.username, stock)
 
+        stocked = []
+        notes = []
 
-        return render_template('user.html', user=current_user, ingredient_list = ingredients.keys())
+        return render_template('user.html', user=current_user, stock = stock)
 
     else:
-        return render_template('user.html', user=current_user, ingredient_list = ingredients.keys())
+        return render_template('user.html', user=current_user, stock = stock)
 
 
 @app.route("/logout")
