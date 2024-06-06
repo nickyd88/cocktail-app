@@ -90,6 +90,15 @@ def userpage():
         return render_template('user.html', user=current_user, stock = sorted_stock)
 
 
+
+@app.route('/recipes')
+@login_required
+def recipepage():
+
+    return render_template('recipes.html', user=current_user)
+
+
+
 @app.route("/logout")
 @login_required
 def logout():
