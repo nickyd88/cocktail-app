@@ -114,4 +114,5 @@ def getStock(username):
     client = getClient()
     stock = client.key('stock', username)
     
+    
 
