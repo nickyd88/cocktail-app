@@ -84,10 +84,12 @@ all_ingredients= [
     'Creme de Cassis',
     'Chocolate Liqueur',
     'Coffee Liqueur',
+    'Elderflower Liqueur',
     'Rasberry Liqueur',
     'Creme de Cassis',
     'Peach Liqueur',
     'Pimm''s',
+    'Suze',
 
     'Jagermeister',
     'Baileys',
@@ -105,6 +107,7 @@ all_ingredients= [
     'Orange Juice',
     'Ginger Beer',
     'Soda Water',
+    'Espresso',
 
     'Simple Syrup',
     'Demarara Syrup',
@@ -518,7 +521,7 @@ recipes = {
         'ratios': ['2 oz Vodka', '1/2 oz Coffee Liqueur', '1 oz Fresh Espresso'],
         'directions': 'Shake with ice and strain into a chilled cocktail glass',
         'garnish': '3 coffee beans',
-        'ingredients': ['Vodka', 'Coffee Liqueur']
+        'ingredients': ['Vodka', 'Coffee Liqueur', 'Espresso']
     },
     'Gold Rush': {
         'ratios': ['2 oz Bourbon Whiskey', '3/4 oz Lemon Juice', '3/4 oz Honey Syrup'],
@@ -573,7 +576,92 @@ recipes = {
         'directions': 'Shake with ice and strain into a glass filled with ice',
         'garnish': 'Cherry and orange slice',
         'ingredients': ['Aged Rum', 'Orange Juice', 'Pineapple Juice', 'Lemon Juice', 'Grenadine', 'Simple Syrup']
+    },
+     'Blackberry Fencehopper': {
+        'ratios': ['2 oz Gin', '1 oz Lemon Juice', '1/2 oz Simple Syrup', '5-6 Blackberries'],
+        'directions': 'Muddle blackberries with simple syrup in a shaker. Add gin and lemon juice, shake with ice, strain into a glass filled with ice.',
+        'garnish': 'Blackberry and lemon wheel',
+        'ingredients': ['Gin', 'Lemon Juice', 'Simple Syrup', 'Blackberries']
+    },
+    'Maple Peach Smash': {
+        'ratios': ['2 oz Bourbon', '1/2 oz Maple Syrup', '1/2 Peach (skinned)', '1/2 oz Lemon Juice', 'Soda Water'],
+        'directions': 'Muddle peach slices in a shaker. Add bourbon, maple syrup, and lemon juice. Shake with ice, strain into a glass with ice, top with seltzer',
+        'garnish': 'Peach slice',
+        'ingredients': ['Bourbon Whiskey', 'Maple Syrup', 'Lemon Juice', 'Peach', 'Soda Water']
+    },
+    'Chocolate Espresso Martini': {
+        'ratios': ['1 oz Vodka', '1 oz Coffee Liqueur', '1 oz Espresso', '1/2 oz Chocolate Liqueur'],
+        'directions': 'Shake all ingredients with ice and strain into a chilled martini glass.',
+        'garnish': 'Coffee beans',
+        'ingredients': ['Vodka', 'Coffee Liqueur', 'Espresso', 'Chocolate Liqueur']
+    },
+    'Revolver': {
+        'ratios': ['2 oz Bourbon', '1/2 oz Coffee Liqueur', '2 dashes Orange Bitters'],
+        'directions': 'Stir all ingredients with ice and strain into a chilled glass.',
+        'garnish': 'Orange twist',
+        'ingredients': ['Bourbon Whiskey', 'Coffee Liqueur', 'Orange Bitters']
+    },
+    'Between the Sheets': {
+        'ratios': ['1 oz Brandy', '1 oz Light Rum', '1 oz Triple Sec', '1/2 oz Lemon Juice'],
+        'directions': 'Shake all ingredients with ice and strain into a chilled glass.',
+        'garnish': 'Lemon twist',
+        'ingredients': ['Other Brandy', 'White Rum', 'Orange Liqueur', 'Lemon Juice']
+    },
+    'Embassy': {
+        'ratios': ['1 oz Brandy', '1 oz Jamaican Rum', '1/2 oz Cointreau', '1/2 oz Lime Juice', '1 dash Angostura Bitters'],
+        'directions': 'Shake all ingredients with ice and strain into a chilled glass.',
+        'garnish': 'Lime twist',
+        'ingredients': ['Other Brandy', 'Jamaican Rum', 'Orange Liqueur', 'Lime Juice', 'Angostura Bitters']
+    },
+    'Americano': {
+        'ratios': ['1 oz Campari', '1 oz Sweet Vermouth', 'Splash of Soda Water'],
+        'directions': 'Build in a glass with ice and top with soda water.',
+        'garnish': 'Orange slice',
+        'ingredients': ['Campari', 'Sweet Vermouth']
+    },
+    'White Negroni': {
+        'ratios': ['1 oz Gin', '1 oz Lillet Blanc', '3/4 oz Suze'],
+        'directions': 'Stir all ingredients with ice and strain into a chilled glass.',
+        'garnish': 'Lemon twist',
+        'ingredients': ['Gin', 'Aromatized White Wine', 'Suze']
+    },
+    'The Council': {
+        'ratios': ['2 oz Bourbon', '1/2 oz Bénédictine', '2 dashes Angostura Bitters', '2 dashes Peychaud Bitters'],
+        'directions': 'Stir all ingredients with ice and strain into a glass.',
+        'garnish': 'Lemon twist',
+        'ingredients': ['Bourbon Whiskey', 'Benedictine', 'Angostura Bitters', 'Peychaud Bitters']
+    },
+    'Elder Fashion Royale': {
+        'ratios': ['2 oz Gin', '1/2 oz Elderflower Liqueur', '1 dash Angostura Bitters'],
+        'directions': 'Stir all ingredients with ice and strain into a glass.',
+        'garnish': 'Lemon twist',
+        'ingredients': ['Gin', 'Elderflower Liqueur', 'Angostura Bitters']
+    },
+    'Kir': {
+        'ratios': ['1/2 oz Crème de Cassis', '5 oz Dry White Wine'],
+        'directions': 'Pour crème de cassis into a wine glass and top with white wine.',
+        'garnish': 'None',
+        'ingredients': ['Creme de Cassis', 'White Wine']
+    },
+    'Kir Royale': {
+        'ratios': ['1/2 oz Crème de Cassis', '5 oz Champagne'],
+        'directions': 'Pour crème de cassis into a champagne flute and top with champagne.',
+        'garnish': 'None',
+        'ingredients': ['Creme de Cassis', 'Sparkling Wine']
     }
+}
+These recipes follow the specified format and only include ingredients from the approved list.
+
+
+
+
+
+
+
+
+
+
+
 }
 
 def getCocktails():
