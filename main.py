@@ -5,7 +5,7 @@ from google.cloud import datastore
 import google.oauth2.id_token
 from data_functions import store_time, fetch_times, getUsers, User
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
-from data_functions import getIngredients, getStock, createStockDictionary, deleteStock, entityJson, updateStock
+from data_functions import getIngredients, getStock, createStockDictionary, deleteStock, entityJson, updateStock, getCocktails
 from config import Config
 import copy
 import json
@@ -25,7 +25,7 @@ def root():
     # Here we use a class of some kind to represent and validate our
     # client-side form data. For example, WTForms is a library that will
     # handle this for us, and we use a custom LoginForm to validate.
-
+    logout_user()
     if request.method == 'POST':
         username = request.form['username']
         user = User(username)
@@ -94,10 +94,58 @@ def userpage():
 @app.route('/recipes')
 @login_required
 def recipepage():
+    recipes = getCocktails()
+    stock = getStock(current_user.username)
 
-    return render_template('recipes.html', user=current_user)
+
+    for rec in recipes.keys():
+        recipes[rec]['stocked']=False
+        have = []
+        missing = []
+        need = set(recipes[rec]['ingredients'])
+
+        for ing in recipes[rec]['ingredients']:
+            try:
+                if stock[ing]['stocked'] is True:
+                    have.append(ing)
+                else:
+                    missing.append(ing)
+            except KeyError:
+                missing.append(ing)
+            
+        if missing == []:
+            recipes[rec]['stocked'] = True
+        recipes[rec]['missing'] = missing
+
+    return render_template('recipes.html', user=current_user, recipes = recipes)
+
+@app.route('/stockedrecipes')
+@login_required
+def stockedrecipespage():
+    recipes = getCocktails()
+    stock = getStock(current_user.username)
 
 
+    for rec in recipes.keys():
+        recipes[rec]['stocked']=False
+        have = []
+        missing = []
+        need = set(recipes[rec]['ingredients'])
+
+        for ing in recipes[rec]['ingredients']:
+            try:
+                if stock[ing]['stocked'] is True:
+                    have.append(ing)
+                else:
+                    missing.append(ing)
+            except KeyError:
+                missing.append(ing)
+            
+        if missing == []:
+            recipes[rec]['stocked'] = True
+        recipes[rec]['missing'] = missing
+
+    return render_template('stockedrecipes.html', user=current_user, recipes = recipes)
 
 @app.route("/logout")
 @login_required

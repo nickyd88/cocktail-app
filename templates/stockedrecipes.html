@@ -3,16 +3,16 @@
 {% block content %}
     <hr>
 
-    <header>
-        <h2>{{ user.username }}'s Recipe Book</h2>
-    </header>
+    <header><h2>{{ user.username }}'s Stocked Recipes</h2></header>
+
         {% include 'sub_navigation.html' %}
 
     <hr>
 
     <div class="recipes-grid">
         {% for cocktail, details in recipes.items() %}
-            <div class="recipe-card {% if not details.stocked %}stocked-false{% endif %}">  
+            {% if  details.stocked %}
+            <div class="recipe-card">  
                 <div class="recipe-info">
                 <p class="recipe_name">{{ cocktail }}</p>
                 {% for item in details.ratios %}
@@ -21,20 +21,13 @@
 
                 <p class="recipe_directions">Directions: {{ details.directions|safe }}</p>   
                 <p class="garnish">Garnish: {{ details.garnish }}</p>
-                {% if not details.stocked %}
-                    <p class="recipe-missing"> Missing: </p>
-                    {% for item in details.missing %}
-                    <li class="recipe-missing">{{item}} </li>
-                    {% endfor %} 
-                {% else %}
-                    <p class="recipe-stocked">Recipe is stocked</p>
-                {% endif %}
+                
                 </div>
       
           </div>
+            {% endif %}
         {% endfor %}
     </div>
         
     
 {% endblock %}
-

@@ -5,9 +5,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <header>
         {% include '_navigation.html' %}
-    </header>
     <main>
         {% block content %}{% endblock %}
     </main>
