@@ -1,35 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <title>Cocktail Database - {% block title %}{% endblock title %}</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>{% block title %}My Flask App{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<h1>Cocktails</h1>
-{% include("_navigation.html") %}
-
-
-
-<section>
-  <header>
-    {% block header %}{% endblock header %}
-  </header>
-  
-  <hr>
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-<ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-{% endwith %}
-
-
-  <main>
-    {% block content %}<p>No data.</p>{% endblock content %}
-  </main>
-</section>
+    <header>
+        {% include '_navigation.html' %}
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
 </body>
 </html>

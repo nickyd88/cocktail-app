@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <hr>
+
+    <h2>{{ user.username }}'s Liquor Cabinet</h2>
+    <form action="" method="post">
+        <fieldset>
+        <legend>Edit Stock:</legend>
+    
+        {% for ingredient in ingredient_list %}
+
+        <div>
+          <input type="checkbox" id="{{ingredient}}" name="{{ingredient}}"/>
+          <label for="{{ingredient}}">{{ingredient}}</label>
+          <input type="text" id="{{ingredient}}.notes" name="{{ingredient}}.notes" placeholder="Details/brands/notes"
+           maxlength='50' size="35">
+        </div>
+      
+        {% endfor %}
+        <button class="button execute" name="submit" value="submit">Submit</button>
+      </fieldset>
+        
+    </form>    
+    
+    
+    
+{% endblock %}
