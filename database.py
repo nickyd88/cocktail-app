@@ -26,7 +26,8 @@ all_ingredients= [
     'Rhum',
     'Jamaican Rum',
     'Spiced Rum',
-    'Tequila',
+    'Blanco Tequila',
+    'Reposado Tequila',
     'Mezcal',
     'Absinthe',
     
@@ -294,12 +295,12 @@ recipes = {
         "ratios": [
             "1 1/2 oz Reposado Tequila",
             "1/2 oz Mezcal",
-            "1/4 oz Simple Syrup",
+            "1/4 oz Agave Syrup",
             "2 dashes Angostura Bitters or Mole Bitters",
         ],
         "directions": "Stir with ice and strain into a chilled cocktail glass with a large ice cube",
         "garnish": "Orange twist",
-        "ingredients": ["Tequila", "Mezcal", "Angostura Bitters"],
+        "ingredients": ["Reposado Tequila", "Mezcal", "Agave Syrup", "Angostura Bitters"],
         "image": "oaxacan.jpg",
     },
     "Maple Old Fashioned": {
@@ -530,10 +531,10 @@ recipes = {
         "image": "default.jpg",
     },
     "Margarita": {
-        "ratios": ["2 oz Tequila", "1 oz Lime Juice", "3/4 oz Cointreau"],
+        "ratios": ["2 oz Blanco Tequila", "1 oz Lime Juice", "3/4 oz Cointreau"],
         "directions": "Shake with ice and strain into a salt-rimmed glass filled with ice",
         "garnish": "Lime wedge",
-        "ingredients": ["Tequila", "Lime Juice", "Orange Liqueur"],
+        "ingredients": ["Blanco Tequila", "Lime Juice", "Orange Liqueur"],
         "image": "default.jpg",
     },
     "Mint Julep": {
@@ -592,7 +593,7 @@ recipes = {
     },
     "Paloma": {
         "ratios": [
-            "2 oz Tequila",
+            "2 oz Blanco Tequila",
             "1/2 oz Lime Juice",
             "1/4 oz Simple Syrup",
             "2 oz Grapefruit Juice",
@@ -601,7 +602,7 @@ recipes = {
         "directions": "Shake all ingredients except soda water, strain into rocks or collins glass with soda water",
         "garnish": "Lime wedge",
         "ingredients": [
-            "Tequila",
+            "Blanco Tequila",
             "Lime Juice",
             "Simple Syrup",
             "Grapefruit Juice",
