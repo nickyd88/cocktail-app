@@ -13,6 +13,9 @@
     <div class="recipes-grid">
         {% for cocktail, details in recipes.items() %}
             <div class="recipe-card {% if not details.stocked %}stocked-false{% endif %}">  
+                <div class="recipe-image">
+                    <img src="{{ url_for('static', filename='images/'+details.image) }}" alt="{{ cocktail }}" class = "recipe-image">
+                </div>
                 <div class="recipe-info">
                 <p class="recipe_name">{{ cocktail }}</p>
                 {% for item in details.ratios %}
@@ -24,7 +27,7 @@
                 {% if not details.stocked %}
                     <p class="recipe-missing"> Missing: </p>
                     {% for item in details.missing %}
-                    <li class="recipe-missing">{{item}} </li>
+                    <p class="recipe-missing">- {{item}} </p>
                     {% endfor %} 
                 {% else %}
                     <p class="recipe-stocked">Recipe is stocked</p>
