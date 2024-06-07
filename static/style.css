@@ -23,6 +23,12 @@ nav ul li a {
   text-decoration: none;
   color: #007BFF;
   font-weight: bold;
+  font-size: 9pt;
+  border: 1px solid #007BFF;
+  border-radius: 3px;
+  padding: 5px;
+  background-color: #f3f9ff;
+
 }
 
 nav ul li a:hover {
@@ -117,20 +123,21 @@ body {
 
 .recipe-card {
   display: grid;
-  grid-template-columns: 210px 1fr; /* Adjust the 100px to the size you want for the image */
+  grid-template-columns: 30% 70%; /* Adjust the 100px to the size you want for the image */
   background-color: white;
   border: 2px solid #a0cfac;
   gap: 5px;
   align-items: start;
   background: #fff;
+  max-width: 500px;
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .recipe-image {
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 1px;
@@ -143,7 +150,7 @@ body {
 .recipe-info {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 100%;
 }
 
 .recipe_name {
