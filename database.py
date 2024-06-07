@@ -6,6 +6,7 @@ def getUsers():
             'Travis',
             'Eammon',
             'Jamie',
+            'Highlake',
             'TEST USER'
             ]
 
@@ -65,6 +66,7 @@ all_ingredients= [
     'Peach Liqueur',
     'Pimm''s',
     'Suze',
+    'Drambuie',
 
     'Jagermeister',
     'Baileys',
@@ -90,6 +92,7 @@ all_ingredients= [
     'Maple Syrup',
     'Honey Syrup',
     'Orgeat',
+    'Agave Syrup',
     'Cream of Coconut',
     'Rasberry Syrup',
 
@@ -618,6 +621,19 @@ recipes = {
         "ingredients": ["Rye Whiskey", "Peychaud Bitters", "Absinthe"],
         "image": "sazerac.jpg",
     },
+    "Amaretto Sour": {
+        "ratios": [
+            "1.5 oz Amaretto",
+            "3/4 oz Apple Brandy",
+            "1 oz Lemon Juice",
+            "1/4 oz Simple Syrup"
+            "Egg white",
+        ],
+        "directions": "Dry shake, then add ice and shake well. Strain into rocks glass with ice",
+        "garnish": "Lemon twist or cocktail cherry",
+        "ingredients": ["Amaretto", "Apple Brandy", "Lemon Juice", "Simple Syrup"],
+        "image": "amaretto_sour.jpg",
+    },   
     "Singapore Sling": {
         "ratios": [
             "1 1/2 oz Gin",
@@ -926,24 +942,7 @@ recipes = {
         "directions": "Stir all ingredients with ice and strain into a chilled glass.",
         "garnish": "Lemon twist",
         "ingredients": ["Gin", "Aromatized White Wine", "Suze"],
-        "image": "default.jpg",
-    },
-    "The Council": {
-        "ratios": [
-            "2 oz Bourbon",
-            "1/2 oz Bénédictine",
-            "2 dashes Angostura Bitters",
-            "2 dashes Peychaud Bitters",
-        ],
-        "directions": "Stir all ingredients with ice and strain into a glass.",
-        "garnish": "Lemon twist",
-        "ingredients": [
-            "Bourbon Whiskey",
-            "Benedictine",
-            "Angostura Bitters",
-            "Peychaud Bitters",
-        ],
-        "image": "default.jpg",
+        "image": "white_negroni.jpg",
     },
     "Elder Fashion Royale": {
         "ratios": [
@@ -991,7 +990,7 @@ recipes = {
             "Angostura Bitters",
             "Chocolate Mole Bitters",
         ],
-        "image": "default.jpg",
+        "image": "conference.jpg",
     },
 }
 
