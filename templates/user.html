@@ -1,19 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <hr>
-    <header>
-    <h2>{{ user.username }}'s Liquor Cabinet</h2>
-    </header>
+
+<div class="header">
+    <a href="/" class="logout-button">Logout</a>
+    <h1 class="page-title">{{ user.username }}'s Liquor Cabinet</h1>
+</div>
         {% include 'sub_navigation.html' %}
 
-    <hr>
+<div class="ingredient-container">
     <form action="" method="post">
         <fieldset>
         <legend>Edit Stock:</legend>
     
         {% for ingredient, result in stock.items() %}
-        <div>
+        <div class="ingredient">
           
           {% if result.stocked %} 
           <input type="checkbox" id="{{ingredient}}" name="{{ingredient|safe}}" checked/>
@@ -32,10 +33,11 @@
         </div>
       
         {% endfor %}
-        <button class="button execute" name="submit" value="submit">Submit</button>
+        <button class="ingredient-button" name="submit" value="submit">Submit</button>
       </fieldset>
         
     </form>    
+</div>
     
     
     

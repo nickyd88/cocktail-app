@@ -1,36 +1,40 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <hr>
 
-    <header><h2>{{ user.username }}'s Stocked Recipes</h2></header>
+
+<div class="header">
+    <a href="/" class="logout-button">Logout</a>
+    <h1 class="page-title">{{ user.username }}'s Stocked Recipes</h1>
+</div>
 
         {% include 'sub_navigation.html' %}
 
-    <hr>
-
-    <div class="recipes-grid">
-        {% for cocktail, details in recipes.items() %}
-            {% if  details.stocked %}
-            <div class="recipe-card">  
-                <div class="recipe-image">
+        <div class="recipes-grid">
+            {% for cocktail, details in recipes.items() %}
+                {% if  details.stocked %}
+                <div class="recipe-card">  
+                    <div class="recipe-image-container">
                         <img src="{{ url_for('static', filename='images/'+details.image) }}" alt="{{ cocktail }}" class = "recipe-image">
                     </div>
-                <div class="recipe-info">
-                <p class="recipe_name">{{ cocktail }}</p>
-                {% for item in details.ratios %}
-                <p class="recipe_ingredients">{{item}}</p>
-                {% endfor %}
-
-                <p class="recipe_directions">Directions: {{ details.directions|safe }}</p>   
-                <p class="garnish">Garnish: {{ details.garnish }}</p>
-                
-                </div>
-      
-          </div>
-            {% endif %}
-        {% endfor %}
-    </div>
+                    <div class="recipe-info">
+                        <h2 class="recipe-title">{{ cocktail }}</h2>
+                        <ul class="recipe-ingredients">
+                            {% for item in details.ratios %}
+                            <li class="recipe-ingredients">{{item}}</li>
+                            {% endfor %}
+                        </ul>
+                        
+    
+                        <p class="recipe-directions">{{ details.directions|safe }}</p>   
+                        <p class="recipe-garnish">Garnish: {{ details.garnish }}</p>
+                    </div>
+          
+              </div>
+              {% endif %}
+            {% endfor %}
+        </div>
+            
         
     
 {% endblock %}

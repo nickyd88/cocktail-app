@@ -1,273 +1,257 @@
 body {
+  margin: 0;
   font-family: Arial, sans-serif;
+}
+
+.header {
+  position: relative;
   background-color: #f4f4f4;
-  margin: 0;
   padding: 20px;
+  text-align: center;
 }
 
-header {
-  margin-bottom: 20px;
-}
-
-nav ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-nav ul li {
-  display: inline;
-  margin-right: 10px;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: #007BFF;
-  font-weight: bold;
-  font-size: 9pt;
-  border: 1px solid #007BFF;
-  border-radius: 3px;
-  padding: 5px;
-  background-color: #f3f9ff;
-
-}
-
-nav ul li a:hover {
-  text-decoration: underline;
-}
-
-/* Styles for Login Container */
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center; /* Center the content */
-}
-
-.container h3 {
-  font-size: 1.5em;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.container form {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center form elements horizontally */
-}
-
-.container select {
-  width: 100%; /* Make select dropdown full width */
-  max-width: 200px; /* Set maximum width */
-  margin-bottom: 10px; /* Add some spacing between select dropdown and button */
-  font-size:18px;
-  padding: 5px;
-}
-
-.container button {
-  padding: 8px 10px;
-  border: 1px solid #4CAF50;
-  border-radius: 4px;
-  background-color: #4CAF50;
+.logout-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 15px;
+  background-color: #ff4c4c;
   color: white;
-  font-weight: bold;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+  font-size: 11pt;  
+  text-decoration: none;
 }
 
-.container button:hover {
-  background-color: #45a049;
-}
-p {
-  margin-top: 20px;
-  font-size: 18px;
+.logout-button:hover {
+  background-color: #ff0000;
 }
 
-
-p,
-label {
-  font:
-    1rem 'Fira Sans',
-    sans-serif;
-}
-
-input {
-  margin: 0.4rem;
-}
-
-
-body {
-  font-family: Arial, sans-serif;
+.page-title {
   margin: 0;
-  padding: 20px;
-  background-color: #f8f8f8;
-}
-
-.recipes-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: flex-start;
-}
-
-.recipe-card2 {
-  background-color: white;
-  border: 2px solid #a0cfac;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  grid-template-columns: 220px 1fr;
-  width: 250px;
-  padding: 15px;
-  display: 'grid';
-  align-items: center;
-  gap: 20px;
-}
-
-.recipe-card {
-  display: grid;
-  grid-template-columns: 30% 70%; /* Adjust the 100px to the size you want for the image */
-  background-color: white;
-  border: 2px solid #a0cfac;
-  gap: 5px;
-  align-items: start;
-  background: #fff;
-  max-width: 500px;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.recipe-image {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 1px;
-}
-
-.recipe-card.stocked-false {
-  border-color: darkred;
-}
-
-.recipe-info {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.recipe_name {
-  font-size: 1.5em;
-  font-weight: bold;
-  margin-bottom: 8px;
-  margin-top: 0px;
-}
-
-.recipe_directions, .recipe-missing {
-  margin-top: 10px;
-  margin-bottom: 1px
-}
-
-.garnish {
-  margin-top: 10px;
-  margin-bottom: 10x
-}
-.recipe_ingredients {
-  font-style: italic;
-  margin: 1px
-}
-
-.recipe_directions {
+  padding: 0;
+  font-size: 2em;
   color: #333;
 }
 
-.garnish {
-  font-weight: normal;
-  color: #555;
+.navbar {
+  display: flex;
+  justify-content: center;
+  background-color: #333;
 }
 
-.recipe-missing {
-  color: darkred;
-  margin-top: 3px;
-  margin-bottom: 1px
+.navbar a {
+  display: block;
+  padding: 8px 10px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1;
+}
+
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.content {
+  padding: 20px;
+}
+
+/* Recipe Grid */
+
+.recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Recipe Cards */
+
+.recipe-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.stocked-false {
+  border: 2px solid darkred;
+}
+
+.recipe-image-container {
+  width: 30%;
+  height: 0;
+  padding-top: 40%; /* Aspect ratio: 4/3 */
+  position: relative;
+  margin-right: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.recipe-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+}
+
+.recipe-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+
+.recipe-title {
+  font-size: 1.5em;
+  margin: 0 0 10px 0;
+}
+
+.recipe-ingredients {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+}
+
+.recipe-ingredients li {
+  margin-bottom: 2px;
+  font-size: 11pt;
+}
+
+.recipe-directions, .recipe-garnish {
+  margin: 5px 0;
+  font-size: .9em;
+  color: #666;
+}
+
+.recipe-missing-ingredients {
+  margin: 5px 0;
+  font-size: 1em;
+  color: darkred; 
 }
 
 .recipe-stocked {
-  color: green;
-  font-style: bold
+  margin: 5px 0;
+  font-size: 1em;
+  color: green; 
 }
 
+.ingredient-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
 fieldset {
   border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 20px;
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  margin: 0 auto;
+  border-radius: 5px;
+  padding: 10px;
 }
 
-legend {
-  font-size: 1.5em;
-  font-weight: bold;
-  margin-bottom: 10px;
+.ingredient {
+  margin-bottom: 15px;
+  display: flex; /* Use flexbox */
+  align-items: center; /* Align items vertically */
 }
-
-
 
 input[type="checkbox"] {
   margin-right: 10px;
 }
 
 input[type="text"] {
-  margin-left: 10px;
+  flex: 1; /* Take remaining space */
+  margin-left: 10px; /* Add spacing between checkbox and text field */
   padding: 5px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
-  max-width: 300px;
-  box-sizing: border-box;
+  border-radius: 3px;
 }
 
-label {
-  flex: 1;
-  font-size: 1em;
-  margin-right: 10px;
-}
-
-button.execute {
-  background-color: #4CAF50;
-  color: white;
+button {
+  margin-top: 15px; /* Add space between ingredients and button */
   padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 1em;
-  transition: background-color 0.3s;
-  display: block;
-  width: 100%;
-  max-width: 100px;
-  margin: 20px auto 0;
 }
 
-button.execute:hover {
-  background-color: #45a049;
+button:hover {
+  background-color: #0056b3;
 }
 
-header {
-  text-align: center;
-  margin-bottom: 20px;
+
+select {
+  width: 180px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 12pt
 }
 
-header h2 {
-  font-size: 2em;
-  font-weight: bold;
-  margin: 0;
+
+
+
+
+
+
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+  .header {
+      padding: 20px 10px;
+  }
+  
+  .logout-button {
+      top: 10px;
+      left: 10px;
+      transform: none;
+      padding: 5px 10px;
+      font-size: 0.9em;
+  }
+
+  .page-title {
+      margin-top: 25px; /* Increase top margin for smaller screens */
+      font-size: 1.5em;
+  }
+  .recipes-grid {
+    grid-template-columns: 1fr; /* Resize recipe card to single grid in small view */
+  }
+  .recipe-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .recipe-image-container {
+    width: 60%;
+    padding-top: 60%; /* Aspect ratio: 1/1 for square images */
+    margin: 0 auto 20px auto; /* Center the image container and add margin */
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+  }
+
+  .recipe-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+  }
+
+  .recipe-info {
+      align-items: center;
+      padding-left: 10%;
+      padding-right: 10%;
+  }
 }
 
-.main-nav {
-  display: flex;
-  justify-content: center;
-}
 
-.logout-nav {
-  text-align: left
-}
+

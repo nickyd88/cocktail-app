@@ -90,7 +90,7 @@ def recipepage():
     for rec in recipes.keys():
         recipes[rec]['stocked']=False
         have = []
-        missing = []
+        missing = ''
         need = set(recipes[rec]['ingredients'])
 
         for ing in recipes[rec]['ingredients']:
@@ -98,13 +98,15 @@ def recipepage():
                 if stock[ing]['stocked'] is True:
                     have.append(ing)
                 else:
-                    missing.append(ing)
+                    missing = missing + ing + ', '
             except KeyError:
-                missing.append(ing)
+                missing = missing + ing + ', '
             
-        if missing == []:
+        if len(missing)==0:
             recipes[rec]['stocked'] = True
-        recipes[rec]['missing'] = missing
+            recipes[rec]['missing'] = missing
+        else:
+            recipes[rec]['missing'] = missing[:-2]
 
     return render_template('recipes.html', user=current_user, recipes = recipes)
 

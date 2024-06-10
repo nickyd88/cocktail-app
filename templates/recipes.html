@@ -1,34 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <hr>
+<div class="header">
+    <a href="/" class="logout-button">Logout</a>
+    <h1 class="page-title">{{ user.username }}'s Recipe Book</h1>
+</div>
 
-    <header>
-        <h2>{{ user.username }}'s Recipe Book</h2>
-    </header>
         {% include 'sub_navigation.html' %}
-
-    <hr>
 
     <div class="recipes-grid">
         {% for cocktail, details in recipes.items() %}
             <div class="recipe-card {% if not details.stocked %}stocked-false{% endif %}">  
-                <div class="recipe-image">
+                <div class="recipe-image-container">
                     <img src="{{ url_for('static', filename='images/'+details.image) }}" alt="{{ cocktail }}" class = "recipe-image">
                 </div>
                 <div class="recipe-info">
-                <p class="recipe_name">{{ cocktail }}</p>
-                {% for item in details.ratios %}
-                <p class="recipe_ingredients">{{item}}</p>
-                {% endfor %}
+                    <h2 class="recipe-title">{{ cocktail }}</h2>
+                    <ul class="recipe-ingredients">
+                        {% for item in details.ratios %}
+                        <li class="recipe-ingredients">{{item}}</li>
+                        {% endfor %}
+                    </ul>
+                    
 
-                <p class="recipe_directions">Directions: {{ details.directions|safe }}</p>   
-                <p class="garnish">Garnish: {{ details.garnish }}</p>
+                    <p class="recipe-directions">{{ details.directions|safe }}</p>   
+                    <p class="recipe-garnish">Garnish: {{ details.garnish }}</p>
                 {% if not details.stocked %}
-                    <p class="recipe-missing"> Missing: </p>
-                    {% for item in details.missing %}
-                    <p class="recipe-missing">- {{item}} </p>
-                    {% endfor %} 
+                    <p class="recipe-missing-ingredients">Missing: {{details.missing}} </p>
                 {% else %}
                     <p class="recipe-stocked">Recipe is stocked</p>
                 {% endif %}

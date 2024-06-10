@@ -6,19 +6,22 @@
 {% block content %}
 <h1>Home</h1>
 
-<div class="container">
-    <h2>Select User</h2>
-    <div>
-
+<div class="login-container">
+    <div class="login-group">
+        <h2>Select User</h2>
+    </div>
     <form action="" method="post">
-    <select name="username">
-        {% for user in userlist[0:] %}
-        <option value="{{user}}">{{user}}</option>
-        {% endfor %}
-    </select>
-    <button class="button execute" name="submit" value="submit">Submit</button>
+        <div class="login-group">
+        <select name="username" class="login-group">
+            {% for user in userlist[0:] %}
+            <option value="{{user}}">{{user}}</option>
+            {% endfor %}
+        </select>
+        </div>
+        <div class="login-group">
+    <button class="button login-group" name="submit" value="submit">Submit</button>
+    </div>
     </form>
     </div>
-</div>
     
 {% endblock %}
