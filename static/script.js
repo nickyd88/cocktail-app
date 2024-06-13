@@ -1,57 +1,54 @@
 
-'use strict';
+// Creating favorite button - reverse fill of icon and make call to update the DB
+function fav(recipeID) {
+  const favCount = document.getElementById(`favs-count-${recipeID}`);
+  const favButton = document.getElementById(`fav-button-${recipeID}`);
 
-window.addEventListener('load', function () {
-  document.getElementById('sign-out').onclick = function () {
-    firebase.auth().signOut();
-  };
+  if (favButton.className === "far fa-heart") {
+    favButton.className = "fas fa-heart";
+  } else {
+    favButton.className = "far fa-heart";
+  }
 
-  // FirebaseUI config.
-  var uiConfig = {
-    signInSuccessUrl: '/',
-    signInOptions: [
-      // Comment out any lines corresponding to providers you did not check in
-      // the Firebase console.
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      firebase.auth.EmailAuthProvider.PROVIDER_ID,
-      //firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-      //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-      //firebase.auth.GithubAuthProvider.PROVIDER_ID,
-      //firebase.auth.PhoneAuthProvider.PROVIDER_ID
+  // The database update will take a few seconds -- the favorite count will update when this call finishes
+  fetch(`/fav/${recipeID}`, { method: "POST" })
+    .then((res) => res.json())
+    .then((data) => {
+      favCount.innerHTML = data["favs"];
+    })
+    .catch((e) => alert("Could not fav recipe."));
+}
 
-    ],
-    // Terms of service url.
-    tosUrl: '<your-tos-url>'
-  };
+// Create a filter for recipe stock
 
-  firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-      // User is signed in, so display the "sign out" button and login info.
-      document.getElementById('sign-out').hidden = false;
-      document.getElementById('login-info').hidden = false;
-      console.log(`Signed in as ${user.displayName} (${user.email})`);
-      user.getIdToken().then(function (token) {
-        // Add the token to the browser's cookies. The server will then be
-        // able to verify the token against the API.
-        // SECURITY NOTE: As cookies can easily be modified, only put the
-        // token (which is verified server-side) in a cookie; do not add other
-        // user information.
-        document.cookie = "token=" + token;
-      });
-    } else {
-      // User is signed out.
-      // Initialize the FirebaseUI Widget using Firebase.
-      var ui = new firebaseui.auth.AuthUI(firebase.auth());
-      // Show the Firebase login button.
-      ui.start('#firebaseui-auth-container', uiConfig);
-      // Update the login state indicators.
-      document.getElementById('sign-out').hidden = true;
-      document.getElementById('login-info').hidden = true;
-      // Clear the token cookie.
-      document.cookie = "token=";
+function filterSelection(c) {
+  var x, i;
+  x = document.getElementsByClassName("recipe-card");
+  if (c == "all") c = "";
+  for (i = 0; i < x.length; i++) {
+    w3AddClass(x[i], "recipe-hide");
+    if (x[i].className.indexOf(c) > -1) w3RemoveClass(x[i], "recipe-hide");
+  }
+}
+
+function w3AddClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+  }
+}
+
+function w3RemoveClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);     
     }
-  }, function (error) {
-    console.log(error);
-    alert('Unable to log in: ' + error)
-  });
-});
+  }
+  element.className = arr1.join(" ");
+}
+

@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block title %}DeFae Mixology{% endblock %}
+
 {% block content %}
 <div class="header">
     <a href="/" class="logout-button">Logout</a>
@@ -8,14 +10,39 @@
 
         {% include 'sub_navigation.html' %}
 
+    <div class="filter-btn-container" id="recipeFilterBtn">
+        <button class="filter-btn active-filter" onclick="filterSelection('stocked-true')">Stocked Recipes</button>
+        <button class="filter-btn" onclick="filterSelection('all')">Show All Recipes</button>
+        
+    </div>
+          
     <div class="recipes-grid">
         {% for cocktail, details in recipes.items() %}
-            <div class="recipe-card {% if not details.stocked %}stocked-false{% endif %}">  
+            <div class="recipe-card {% if not details.stocked %}stocked-false{% else %}stocked-true{% endif %}"> 
+
                 <div class="recipe-image-container">
-                    <img src="{{ url_for('static', filename='images/'+details.image) }}" alt="{{ cocktail }}" class = "recipe-image">
+                    <img src="{{ url_for('static', filename='images/'+details.image) }}" alt="{{ details.name }}" class = "recipe-image">
+                </div>    
+                <div class="favorite">
+                    <span class="favs-count" id="favs-count-{{cocktail}}">
+                        {{ details.favs }}</span> 
+                        {% if cocktail in favlist %}
+                    <i
+                        class="fas fa-heart"
+                        id="fav-button-{{cocktail}}"
+                        onclick="fav({{cocktail}})"
+                    ></i>
+                    {% else %}
+                    <i
+                        class="far fa-heart"
+                        id="fav-button-{{cocktail}}"
+                        onclick="fav({{cocktail}})"
+                    ></i>
+                    {% endif %}
+                    
                 </div>
                 <div class="recipe-info">
-                    <h2 class="recipe-title">{{ cocktail }}</h2>
+                    <h2 class="recipe-title">{{ details.name }}</h2>
                     <ul class="recipe-ingredients">
                         {% for item in details.ratios %}
                         <li class="recipe-ingredients">{{item}}</li>
@@ -34,6 +61,18 @@
       
           </div>
         {% endfor %}
+        <script>
+        filterSelection("stocked-true") // show stock only by default
+        // Add active class to the current button (highlight it)
+        var btnContainer = document.getElementById("recipeFilterBtn");
+        var btns = btnContainer.getElementsByClassName("filter-btn");
+        for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener("click", function(){
+            var current = document.getElementsByClassName("active-filter");
+            current[0].className = current[0].className.replace(" active-filter", "");
+            this.className += " active-filter";
+        });
+        }</script>
     </div>
         
     

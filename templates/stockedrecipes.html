@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block title %}DeFae Mixology{% endblock %}
+
 {% block content %}
 
 
@@ -15,10 +17,29 @@
                 {% if  details.stocked %}
                 <div class="recipe-card">  
                     <div class="recipe-image-container">
-                        <img src="{{ url_for('static', filename='images/'+details.image) }}" alt="{{ cocktail }}" class = "recipe-image">
+                        <img src="{{ url_for('static', filename='images/'+details.image) }}" alt="{{ details.name }}" class = "recipe-image">
                     </div>
+                    <div class="favorite">
+                        <span class="favs-count" id="favs-count-{{cocktail}}">
+                            {{ details.favs }}</span> 
+                            {% if cocktail in favlist %}
+                        <i
+                            class="fas fa-heart"
+                            id="fav-button-{{cocktail}}"
+                            onclick="fav({{cocktail}})"
+                        ></i>
+                        {% else %}
+                        <i
+                            class="far fa-heart"
+                            id="fav-button-{{cocktail}}"
+                            onclick="fav({{cocktail}})"
+                        ></i>
+                        {% endif %}
+                        
+                    </div>
+    
                     <div class="recipe-info">
-                        <h2 class="recipe-title">{{ cocktail }}</h2>
+                        <h2 class="recipe-title">{{ details.name }}</h2>
                         <ul class="recipe-ingredients">
                             {% for item in details.ratios %}
                             <li class="recipe-ingredients">{{item}}</li>
@@ -28,6 +49,7 @@
     
                         <p class="recipe-directions">{{ details.directions|safe }}</p>   
                         <p class="recipe-garnish">Garnish: {{ details.garnish }}</p>
+        
                     </div>
           
               </div>

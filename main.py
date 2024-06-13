@@ -1,9 +1,9 @@
 import datetime
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, jsonify
 from google.auth.transport import requests
 from google.cloud import datastore
 import google.oauth2.id_token
-from database import getUsers, getIngredients, getCocktails
+from database import getUsers, getIngredients, getCocktails, getCocktailsFromDB, getRecipe, getFav, addRemoveFav
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from data_functions import getStock, createStockDictionary, deleteStock, entityJson, updateStock, User
 from config import Config
@@ -83,9 +83,9 @@ def userpage():
 @app.route('/recipes')
 @login_required
 def recipepage():
-    recipes = getCocktails()
+    recipes = getCocktailsFromDB()
     stock = getStock(current_user.username)
-
+    favlist = getFav(current_user.username)
 
     for rec in recipes.keys():
         recipes[rec]['stocked']=False
@@ -108,35 +108,36 @@ def recipepage():
         else:
             recipes[rec]['missing'] = missing[:-2]
 
-    return render_template('recipes.html', user=current_user, recipes = recipes)
+    return render_template('recipes.html', user=current_user, recipes = recipes, favlist = favlist['fav_list'])
 
-@app.route('/stockedrecipes')
-@login_required
-def stockedrecipespage():
-    recipes = getCocktails()
-    stock = getStock(current_user.username)
-
-
-    for rec in recipes.keys():
-        recipes[rec]['stocked']=False
-        have = []
-        missing = []
-        need = set(recipes[rec]['ingredients'])
-
-        for ing in recipes[rec]['ingredients']:
-            try:
-                if stock[ing]['stocked'] is True:
-                    have.append(ing)
-                else:
-                    missing.append(ing)
-            except KeyError:
-                missing.append(ing)
-            
-        if missing == []:
-            recipes[rec]['stocked'] = True
-        recipes[rec]['missing'] = missing
-
-    return render_template('stockedrecipes.html', user=current_user, recipes = recipes)
+#@app.route('/stockedrecipes')
+#@login_required
+#def stockedrecipespage():
+#    recipes = getCocktailsFromDB()
+#    stock = getStock(current_user.username)
+#    favlist = getFav(current_user.username)    #
+#
+#
+#    for rec in recipes.keys():
+#        recipes[rec]['stocked']=False
+#        have = []
+#        missing = []
+#        need = set(recipes[rec]['ingredients'])#
+#
+#        for ing in recipes[rec]['ingredients']:
+#            try:
+#                if stock[ing]['stocked'] is True:
+#                    have.append(ing)
+#                else:
+#                    missing.append(ing)
+#            except KeyError:
+#                missing.append(ing)
+#            
+#        if missing == []:
+#            recipes[rec]['stocked'] = True
+#        recipes[rec]['missing'] = missing#
+#
+#    return render_template('stockedrecipes.html', user=current_user, recipes = recipes, favlist = favlist['fav_list'])
 
 @app.route("/logout")
 @login_required
@@ -144,6 +145,19 @@ def logout():
     logout_user()
     return redirect('index')
 
+
+## Favorite a recipe [for js function]
+@app.route("/fav/<recipe_id>", methods=['POST'])
+@login_required
+def fav(recipe_id):
+    recipeEnt = getRecipe(str(recipe_id))
+    favEnt = getFav(current_user.username)
+
+    if not recipeEnt:
+        return jsonfiy({'error': 'Post or user favorite list does not exist.'}, 400)
+    else:
+        favEnt, recipeEnt = addRemoveFav(favEnt, recipeEnt)
+    return jsonify({"favs": recipeEnt['favs'], "fav": str(recipe_id) in favEnt['fav_list']})
 
 
 ## Run the thing

@@ -1,6 +1,7 @@
 from google.cloud import datastore
 from flask_login import UserMixin, login_required, login_user, logout_user, current_user
 import json
+#import jsonify
 from database import getUsers, getIngredients, getCocktails
 
 
@@ -11,6 +12,13 @@ class User(UserMixin):
         self.id = username
 
 
+## Data Store Functions
+
+def getClient():
+    return datastore.Client()
+
+
+
 # generate dictionary of ingredients for datastore
 def createStockDictionary():
     ingredients = {}
@@ -18,11 +26,6 @@ def createStockDictionary():
         ingredients[i] = {'stocked': False, 'notes': ''}
     return ingredients
 
-
-## Data Store Functions
-
-def getClient():
-    return datastore.Client()
 
 def getStock(username):
     # initialize a client

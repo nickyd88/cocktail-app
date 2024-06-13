@@ -1,3 +1,5 @@
+from google.cloud import datastore
+import json
 
 
 def getUsers():
@@ -6,10 +8,10 @@ def getUsers():
             'Travis',
             'Eammon',
             'Jamie',
+            'Sean M',
             'Highlake',
             'TEST USER'
             ]
-
 
 
 all_ingredients= [
@@ -109,9 +111,10 @@ def getIngredients():
     return all_ingredients
 
 
-
+## IMPORTANT ## ONLY ADD NEW RECIPES TO THE END OF THIS LIST ## OTHERWISE IDS WILL FAIL
 recipes = {
-    "Paper Plane": {
+    '1': {
+        "name": "Paper Plane",
         "ratios": [
             "3/4 oz Bourbon",
             "3/4 oz Aperol",
@@ -123,7 +126,8 @@ recipes = {
         "ingredients": ["Bourbon Whiskey", "Aperol", "Amaro", "Lemon Juice"],
         "image": "paper_plane.jpg",
     },
-    "Last Word": {
+    '2': {
+        "name": "Last Word",
         "ratios": [
             "3/4 oz Gin",
             "3/4 oz Green Chartreuse",
@@ -135,7 +139,8 @@ recipes = {
         "ingredients": ["Gin", "Green Chartreuse", "Lime Juice", "Cherry Liqueur"],
         "image": "last_word.jpg",
     },
-    "Naked and Famous": {
+    '3': {
+        "name": "Naked and Famous",
         "ratios": [
             "3/4 oz Mezcal",
             "3/4 oz Aperol",
@@ -147,7 +152,8 @@ recipes = {
         "ingredients": ["Mezcal", "Aperol", "Yellow Chartreuse", "Lime Juice"],
         "image": "naked_famous.jpg",
     },
-    "Monte Cassino": {
+    '4': {
+        "name": "Monte Cassino",
         "ratios": [
             "3/4 oz Rye Whiskey",
             "3/4 oz Benedictine",
@@ -164,7 +170,8 @@ recipes = {
         ],
         "image": "monte_cassino.jpg",
     },
-    "Final Ward": {
+    '5': {
+        "name": "Final Ward",
         "ratios": [
             "3/4 oz Rye Whiskey",
             "3/4 oz Green Chartreuse",
@@ -181,7 +188,8 @@ recipes = {
         ],
         "image": "final_ward.jpg",
     },
-    "Ward 8": {
+    '6': {
+        "name": "Ward 8",
         "ratios": [
             "2 oz Rye Whiskey",
             "1/2 oz Lemon Juice",
@@ -193,7 +201,8 @@ recipes = {
         "ingredients": ["Rye Whiskey", "Lemon Juice", "Orange Juice", "Grenadine"],
         "image": "ward_8.jpg",
     },
-    "Momisette": {
+    '7': {
+        "name": "Momisette",
         "ratios": [
             "1 1/2 oz Absinthe",
             "3/4 oz Orgeat",
@@ -205,7 +214,8 @@ recipes = {
         "ingredients": ["Absinthe", "Orgeat", "Lemon Juice", "Soda Water"],
         "image": "momisette.jpg",
     },
-    "Painkiller": {
+    '8': {
+        "name": "Painkiller",
         "ratios": [
             "2 oz Aged Rum",
             "4 oz Pineapple Juice",
@@ -222,28 +232,32 @@ recipes = {
         ],
         "image": "painkiller.jpg",
     },
-    "Pina Colada": {
+    '9': {
+        "name": "Pina Colada",
         "ratios": ["2 oz White Rum", "1 oz Cream of Coconut", "1 oz Pineapple Juice"],
         "directions": "Blend with ice and strain into a chilled cocktail glass",
         "garnish": "Pineapple wedge and cherry",
         "ingredients": ["White Rum", "Cream of Coconut", "Pineapple Juice"],
         "image": "pina_colada.jpg",
     },
-    "Bee's Knees": {
+    '10': {
+        "name": "Bee's Knees",
         "ratios": ["2 oz Gin", "3/4 oz Lemon Juice", "3/4 oz Honey Syrup"],
         "directions": "Shake with ice and strain into a chilled cocktail glass",
         "garnish": "Lemon twist",
         "ingredients": ["Gin", "Lemon Juice", "Honey Syrup"],
         "image": "bees_knees.jpg",
     },
-    "White Lady": {
+    '11': {
+        "name": "White Lady",
         "ratios": ["2 oz Gin", "3/4 oz Cointreau", "3/4 oz Lemon Juice"],
         "directions": "Shake with ice and strain into a chilled cocktail glass",
         "garnish": "Lemon twist",
         "ingredients": ["Gin", "Lemon Juice", "Orange Liqueur"],
         "image": "white_lady.jpg",
     },
-    "Pink Lady": {
+    '12': {
+        "name": "Pink Lady",
         "ratios": [
             "1 1/2 oz Gin",
             "1/4 oz Applejack",
@@ -256,7 +270,8 @@ recipes = {
         "ingredients": ["Gin", "Apple Brandy", "Lemon Juice", "Grenadine"],
         "image": "pink_lady.jpg",
     },
-    "Clover Club": {
+    '13': {
+        "name": "Clover Club",
         "ratios": [
             "2 oz Gin",
             "3/4 oz Lemon Juice",
@@ -268,7 +283,8 @@ recipes = {
         "ingredients": ["Gin", "Lemon Juice", "Raspberry Syrup"],
         "image": "clover_club.jpg",
     },
-    "Pisco Sour": {
+    '14': {
+        "name": "Pisco Sour",
         "ratios": [
             "2 oz Pisco",
             "1 oz Lemon Juice",
@@ -280,7 +296,8 @@ recipes = {
         "ingredients": ["Pisco", "Lemon Juice", "Simple Syrup"],
         "image": "pisco_sour.jpg",
     },
-    "Old Fashioned": {
+    '15': {
+        "name": "Old Fashioned",
         "ratios": [
             "2 oz Bourbon or Rye Whiskey",
             "1/4 oz Demarara Syrup",
@@ -291,7 +308,8 @@ recipes = {
         "ingredients": ["Bourbon Whiskey", "Demarara Syrup", "Angostura Bitters"],
         "image": "old_fashioned.jpg",
     },
-    "Oaxacan Old Fashioned": {
+    '16': {
+        "name": "Oaxacan Old Fashioned",
         "ratios": [
             "1 1/2 oz Reposado Tequila",
             "1/2 oz Mezcal",
@@ -303,7 +321,8 @@ recipes = {
         "ingredients": ["Reposado Tequila", "Mezcal", "Agave Syrup", "Angostura Bitters"],
         "image": "oaxacan.jpg",
     },
-    "Maple Old Fashioned": {
+    '17': {
+        "name": "Maple Old Fashioned",
         "ratios": [
             "2 oz Bourbon",
             "1/4 oz Maple Syrup",
@@ -314,7 +333,8 @@ recipes = {
         "ingredients": ["Bourbon Whiskey", "Maple Syrup", "Angostura Bitters"],
         "image": "maple_fashioned.jpg",
     },
-    "Enzoni": {
+    '18': {
+        "name": "Enzoni",
         "ratios": [
             "1 1/2 oz Gin",
             "3/4 oz Campari",
@@ -327,14 +347,16 @@ recipes = {
         "ingredients": ["Gin", "Campari", "Lemon Juice", "Simple Syrup", "Grapes"],
         "image": "enzoni.jpg",
     },
-    "Negroni": {
+    '19': {
+        "name": "Negroni",
         "ratios": ["1 oz Gin", "1 oz Campari", "1 oz Sweet Vermouth"],
         "directions": "Stir with ice and strain into a chilled cocktail glass with large ice cube",
         "garnish": "Orange twist",
         "ingredients": ["Gin", "Campari", "Sweet Vermouth"],
         "image": "negroni.jpg",
     },
-    "Corpse Reviver #2": {
+    '20': {
+        "name": "Corpse Reviver #2",
         "ratios": [
             "3/4 oz Gin",
             "3/4 oz Cointreau",
@@ -353,7 +375,8 @@ recipes = {
         ],
         "image": "corpse_reviver_2.jpg",
     },
-    "Aviation": {
+    '21': {
+        "name": "Aviation",
         "ratios": [
             "2 oz Gin",
             "1/2 oz Maraschino Liqueur",
@@ -365,14 +388,16 @@ recipes = {
         "ingredients": ["Gin", "Creme de Violette", "Lemon Juice", "Cherry Liqueur"],
         "image": "aviation.png",
     },
-    "Bijou": {
+    '22': {
+        "name": "Bijou",
         "ratios": ["1 oz Gin", "1 oz Green Chartreuse", "1 oz Sweet Vermouth"],
         "directions": "Stir with ice and strain into a chilled cocktail glass",
         "garnish": "Lemon twist",
         "ingredients": ["Gin", "Green Chartreuse", "Sweet Vermouth"],
         "image": "default.jpg",
     },
-    "Blood and Sand": {
+    '23': {
+        "name": "Blood and Sand",
         "ratios": [
             "3/4 oz Scotch Whiskey",
             "3/4 oz Sweet Vermouth",
@@ -389,35 +414,40 @@ recipes = {
         ],
         "image": "default.jpg",
     },
-    "Boulevardier": {
+    '24': {
+        "name": "Boulevardier",
         "ratios": ["1 oz Bourbon Whiskey", "1 oz Campari", "1 oz Sweet Vermouth"],
         "directions": "Stir with ice and strain into a chilled cocktail glass",
         "garnish": "Orange twist",
         "ingredients": ["Bourbon Whiskey", "Campari", "Sweet Vermouth"],
         "image": "boulevardier.jpg",
     },
-    "Corpse Reviver #1": {
+    '25': {
+        "name": "Corpse Reviver #1",
         "ratios": ["1 oz Cognac", "1 oz Calvados", "1/2 oz Sweet Vermouth"],
         "directions": "Stir with ice and strain into a chilled cocktail glass",
         "garnish": "None",
         "ingredients": ["Cognac", "Apple Brandy", "Sweet Vermouth"],
         "image": "default.jpg",
     },
-    "Daiquiri": {
+    '26': {
+        "name": "Daiquiri",
         "ratios": ["2 oz White Rum", "1 oz Lime Juice", "3/4 oz Simple Syrup"],
         "directions": "Shake with ice and strain into a chilled cocktail glass",
         "garnish": "Lime wheel",
         "ingredients": ["White Rum", "Lime Juice", "Simple Syrup"],
         "image": "daiquiri.jpg",
     },
-    "Dark and Stormy": {
+    '27': {
+        "name": "Dark and Stormy",
         "ratios": ["2 oz Spiced Rum", "3 oz Ginger Beer", "1/2 oz Lime Juice"],
         "directions": "Build in a glass filled with ice",
         "garnish": "Lime wedge",
         "ingredients": ["Spiced Rum", "Ginger Beer", "Lime Juice"],
         "image": "default.jpg",
     },
-    "French 75": {
+    '28': {
+        "name": "French 75",
         "ratios": [
             "1 oz Gin",
             "1/2 oz Lemon Juice",
@@ -429,7 +459,8 @@ recipes = {
         "ingredients": ["Gin", "Lemon Juice", "Simple Syrup", "Sparkling Wine"],
         "image": "french_75.jpg",
     },
-    "Hemingway Daiquiri": {
+    '29': {
+        "name": "Hemingway Daiquiri",
         "ratios": [
             "2 oz White Rum",
             "1/2 oz Maraschino Liqueur",
@@ -446,21 +477,24 @@ recipes = {
         ],
         "image": "default.jpg",
     },
-    "Sidecar": {
+    '30': {
+        "name": "Sidecar",
         "ratios": ["2 oz Cognac", "3/4 oz Cointreau", "3/4 oz Lemon Juice"],
         "directions": "Shake with ice and strain into a sugar-rimmed glass",
         "garnish": "Lemon twist",
         "ingredients": ["Cognac", "Lemon Juice", "Orange Liqueur"],
         "image": "sidecar.jpg",
     },
-    "Jack Rose": {
+    '31': {
+        "name": "Jack Rose",
         "ratios": ["2 oz Applejack", "3/4 oz Lemon Juice", "1/2 oz Grenadine"],
         "directions": "Shake with ice and strain into a chilled cocktail glass",
         "garnish": "Cherry",
         "ingredients": ["Apple Brandy", "Lemon Juice", "Grenadine"],
         "image": "default.jpg",
     },
-    "Mai Tai": {
+    '32': {
+        "name": "Mai Tai",
         "ratios": [
             "1 oz White Rum",
             "1 oz Aged Rum",
@@ -479,7 +513,8 @@ recipes = {
         ],
         "image": "mai_tai.jpg",
     },
-    "Manhattan": {
+    '33': {
+        "name": "Manhattan",
         "ratios": [
             "2 oz Rye Whiskey",
             "1 oz Sweet Vermouth",
@@ -490,7 +525,8 @@ recipes = {
         "ingredients": ["Rye Whiskey", "Sweet Vermouth", "Angostura Bitters"],
         "image": "manhattan.jpg",
     },
-    "Vieux Carré": {
+    '34': {
+        "name": "Vieux Carré",
         "ratios": [
             "1 oz Rye Whiskey",
             "1 oz Cognac",
@@ -511,7 +547,8 @@ recipes = {
         ],
         "image": "vieux_carre.jpg",
     },
-    "Martinez": {
+    '35': {
+        "name": "Martinez",
         "ratios": [
             "1 1/2 oz Old Tom Gin",
             "1 1/2 oz Sweet Vermouth",
@@ -523,28 +560,32 @@ recipes = {
         "ingredients": ["Gin", "Sweet Vermouth", "Cherry Liqueur", "Orange Bitters"],
         "image": "default.jpg",
     },
-    "Martini": {
+    '36': {
+        "name": "Martini",
         "ratios": ["2 oz Gin", "1 oz Dry Vermouth", "1 dash Orange Bitters, optional"],
         "directions": "Stir with ice and strain into a chilled cocktail glass",
         "garnish": "Lemon twist or olive",
         "ingredients": ["Gin", "Dry Vermouth"],
         "image": "default.jpg",
     },
-    "Margarita": {
+    '37': {
+        "name": "Margarita",
         "ratios": ["2 oz Blanco Tequila", "1 oz Lime Juice", "3/4 oz Cointreau"],
         "directions": "Shake with ice and strain into a salt-rimmed glass filled with ice",
         "garnish": "Lime wedge",
         "ingredients": ["Blanco Tequila", "Lime Juice", "Orange Liqueur"],
         "image": "default.jpg",
     },
-    "Mint Julep": {
+    '38': {
+        "name": "Mint Julep",
         "ratios": ["2 oz Bourbon Whiskey", "1/2 oz Simple Syrup", "8-10 Mint Leaves"],
         "directions": "Muddle mint leaves with simple syrup, fill the glass with crushed ice, add bourbon, and stir",
         "garnish": "Mint sprig",
         "ingredients": ["Bourbon Whiskey", "Simple Syrup", "Mint"],
         "image": "default.jpg",
     },
-    "Mojito": {
+    '39': {
+        "name": "Mojito",
         "ratios": [
             "2 oz White Rum",
             "1 oz Lime Juice",
@@ -563,35 +604,40 @@ recipes = {
         ],
         "image": "default.jpg",
     },
-    "Moscow Mule": {
+    '40': {
+        "name": "Moscow Mule",
         "ratios": ["2 oz Vodka", "1/2 oz Lime Juice", "3 oz Ginger Beer"],
         "directions": "Build in a copper mug filled with ice, top with ginger beer",
         "garnish": "Lime wedge",
         "ingredients": ["Vodka", "Lime Juice", "Ginger Beer"],
         "image": "default.jpg",
     },
-    "Jamaican Mule": {
+    '41': {
+        "name": "Jamaican Mule",
         "ratios": ["2 oz Jamaican Rum", "1/2 oz Lime Juice", "3 oz Ginger Beer"],
         "directions": "Build in a copper mug filled with ice, top with ginger beer",
         "garnish": "Lime wedge",
         "ingredients": ["Jamaican Rum", "Lime Juice", "Ginger Beer"],
         "image": "default.jpg",
     },
-    "Kentucky Mule": {
+    '42': {
+        "name": "Kentucky Mule",
         "ratios": ["2 oz Bourbon", "1/2 oz Lime Juice", "3 oz Ginger Beer"],
         "directions": "Build in a copper mug filled with ice, top with ginger beer",
         "garnish": "Lime wedge",
         "ingredients": ["Bourbon Whiskey", "Lime Juice", "Ginger Beer"],
         "image": "default.jpg",
     },
-    "London Mule": {
+    '43': {
+        "name": "London Mule",
         "ratios": ["2 oz Gin", "1/2 oz Lime Juice", "3 oz Ginger Beer"],
         "directions": "Build in a copper mug filled with ice, top with ginger beer",
         "garnish": "Lime wedge",
         "ingredients": ["Gin", "Lime Juice", "Ginger Beer"],
         "image": "default.jpg",
     },
-    "Paloma": {
+    '44': {
+        "name": "Paloma",
         "ratios": [
             "2 oz Blanco Tequila",
             "1/2 oz Lime Juice",
@@ -610,7 +656,8 @@ recipes = {
         ],
         "image": "default.jpg",
     },
-    "Sazerac": {
+    '45': {
+        "name": "Sazerac",
         "ratios": [
             "2 oz Rye Whiskey",
             "1 sugar cube",
@@ -622,12 +669,13 @@ recipes = {
         "ingredients": ["Rye Whiskey", "Peychaud Bitters", "Absinthe"],
         "image": "sazerac.jpg",
     },
-    "Amaretto Sour": {
+    '46': {
+        "name": "Amaretto Sour",
         "ratios": [
             "1.5 oz Amaretto",
             "3/4 oz Apple Brandy",
             "1 oz Lemon Juice",
-            "1/4 oz Simple Syrup"
+            "1/4 oz Simple Syrup",
             "Egg white",
         ],
         "directions": "Dry shake, then add ice and shake well. Strain into rocks glass with ice",
@@ -635,7 +683,8 @@ recipes = {
         "ingredients": ["Amaretto", "Apple Brandy", "Lemon Juice", "Simple Syrup"],
         "image": "amaretto_sour.jpg",
     },   
-    "Singapore Sling": {
+    '47': {
+        "name": "Singapore Sling",
         "ratios": [
             "1 1/2 oz Gin",
             "1 oz Cherry Heering",
@@ -659,7 +708,8 @@ recipes = {
         ],
         "image": "default.jpg",
     },
-    "Southside": {
+    '48': {
+        "name": "Southside",
         "ratios": [
             "2 oz Gin",
             "3/4 oz Lime Juice",
@@ -671,14 +721,16 @@ recipes = {
         "ingredients": ["Gin", "Lime Juice", "Simple Syrup", "Mint"],
         "image": "default.jpg",
     },
-    "Tom Collins": {
+    '49': {
+        "name": "Tom Collins",
         "ratios": ["2 oz Gin", "1 oz Lemon Juice", "1/2 oz Simple Syrup", "Soda Water"],
         "directions": "Build in a glass filled with ice, top with soda water",
         "garnish": "Lemon wheel",
         "ingredients": ["Gin", "Lemon Juice", "Simple Syrup", "Soda Water"],
         "image": "default.jpg",
     },
-    "Whiskey Sour": {
+    '50': {
+        "name": "Whiskey Sour",
         "ratios": [
             "2 oz Bourbon Whiskey",
             "3/4 oz Lemon Juice",
@@ -690,14 +742,16 @@ recipes = {
         "ingredients": ["Bourbon Whiskey", "Lemon Juice", "Simple Syrup"],
         "image": "default.jpg",
     },
-    "White Russian": {
+    '51': {
+        "name": "White Russian",
         "ratios": ["2 oz Vodka", "1 oz Coffee Liqueur", "1 oz Cream"],
         "directions": "Build in a glass filled with ice, top with cream",
         "garnish": "None",
         "ingredients": ["Vodka", "Coffee Liqueur"],
         "image": "default.jpg",
     },
-    "Rum Punch": {
+    '52': {
+        "name": "Rum Punch",
         "ratios": [
             "1 oz Aged Rum",
             "1 oz White Rum",
@@ -720,28 +774,32 @@ recipes = {
         ],
         "image": "default.jpg",
     },
-    "French Martini": {
+    '53': {
+        "name": "French Martini",
         "ratios": ["2 oz Vodka", "1/2 oz Raspberry Liqueur", "1/2 oz Pineapple Juice"],
         "directions": "Shake with ice and strain into a chilled cocktail glass",
         "garnish": "Lemon twist",
         "ingredients": ["Vodka", "Raspberry Liqueur", "Pineapple Juice"],
         "image": "default.jpg",
     },
-    "Espresso Martini": {
+    '54': {
+        "name": "Espresso Martini",
         "ratios": ["2 oz Vodka", "1/2 oz Coffee Liqueur", "1 oz Fresh Espresso"],
         "directions": "Shake with ice and strain into a chilled cocktail glass",
         "garnish": "3 coffee beans",
         "ingredients": ["Vodka", "Coffee Liqueur", "Espresso"],
         "image": "default.jpg",
     },
-    "Gold Rush": {
+    '55': {
+        "name": "Gold Rush",
         "ratios": ["2 oz Bourbon Whiskey", "3/4 oz Lemon Juice", "3/4 oz Honey Syrup"],
         "directions": "Shake with ice and strain into a glass filled with ice",
         "garnish": "Lemon wheel",
         "ingredients": ["Bourbon Whiskey", "Lemon Juice", "Honey Syrup"],
         "image": "default.jpg",
     },
-    "Pisco Punch": {
+    '56': {
+        "name": "Pisco Punch",
         "ratios": [
             "2 oz Pisco",
             "1 oz Pineapple Juice",
@@ -753,7 +811,8 @@ recipes = {
         "ingredients": ["Pisco", "Pineapple Juice", "Lemon Juice", "Simple Syrup"],
         "image": "default.jpg",
     },
-    "Brandy Crusta": {
+    '57': {
+        "name": "Brandy Crusta",
         "ratios": [
             "2 oz Cognac",
             "1/2 oz Lemon Juice",
@@ -772,7 +831,8 @@ recipes = {
         ],
         "image": "default.jpg",
     },
-    "Jungle Bird": {
+    '58': {
+        "name": "Jungle Bird",
         "ratios": [
             "1 1/2 oz Aged Rum",
             "3/4 oz Campari",
@@ -791,7 +851,8 @@ recipes = {
         ],
         "image": "default.jpg",
     },
-    "Penicillin": {
+    '59': {
+        "name": "Penicillin",
         "ratios": [
             "2 oz Scotch Whiskey",
             "3/4 oz Lemon Juice",
@@ -803,14 +864,16 @@ recipes = {
         "ingredients": ["Scotch Whiskey", "Lemon Juice", "Honey Syrup"],
         "image": "default.jpg",
     },
-    "Mimosa": {
+    '60': {
+        "name": "Mimosa",
         "ratios": ["2 oz Orange Juice", "4 oz Champagne"],
         "directions": "Build in a champagne flute, top with champagne",
         "garnish": "Orange slice",
-        "ingredients": ["Orange Juice"],
+        "ingredients": ["Orange Juice", "Sparkling Wine"],
         "image": "default.jpg",
     },
-    "Pegu Club": {
+    '61': {
+        "name": "Pegu Club",
         "ratios": [
             "2 oz Gin",
             "3/4 oz Orange Liqueur",
@@ -829,7 +892,8 @@ recipes = {
         ],
         "image": "default.jpg",
     },
-    "Planter's Punch": {
+    '62': {
+        "name": "Planter's Punch",
         "ratios": [
             "1 1/2 oz Aged Rum",
             "1 oz Orange Juice",
@@ -850,7 +914,8 @@ recipes = {
         ],
         "image": "default.jpg",
     },
-    "Blackberry Fencehopper": {
+    '63': {
+        "name": "Blackberry Fencehopper",
         "ratios": [
             "2 oz Gin",
             "1 oz Lemon Juice",
@@ -862,7 +927,8 @@ recipes = {
         "ingredients": ["Gin", "Lemon Juice", "Simple Syrup", "Blackberries"],
         "image": "default.jpg",
     },
-    "Maple Peach Smash": {
+    '64': {
+        "name": "Maple Peach Smash",
         "ratios": [
             "2 oz Bourbon",
             "1/2 oz Maple Syrup",
@@ -881,7 +947,8 @@ recipes = {
         ],
         "image": "default.jpg",
     },
-    "Chocolate Espresso Martini": {
+    '65': {
+        "name": "Chocolate Espresso Martini",
         "ratios": [
             "1 oz Vodka",
             "1 oz Coffee Liqueur",
@@ -893,14 +960,16 @@ recipes = {
         "ingredients": ["Vodka", "Coffee Liqueur", "Espresso", "Chocolate Liqueur"],
         "image": "default.jpg",
     },
-    "Revolver": {
+    '66': {
+        "name": "Revolver",
         "ratios": ["2 oz Bourbon", "1/2 oz Coffee Liqueur", "2 dashes Orange Bitters"],
         "directions": "Stir all ingredients with ice and strain into a chilled glass.",
         "garnish": "Orange twist",
         "ingredients": ["Bourbon Whiskey", "Coffee Liqueur", "Orange Bitters"],
         "image": "default.jpg",
     },
-    "Between the Sheets": {
+    '67': {
+        "name": "Between the Sheets",
         "ratios": [
             "1 oz Brandy",
             "1 oz Light Rum",
@@ -912,7 +981,8 @@ recipes = {
         "ingredients": ["Other Brandy", "White Rum", "Orange Liqueur", "Lemon Juice"],
         "image": "default.jpg",
     },
-    "Embassy": {
+    '68': {
+        "name": "Embassy",
         "ratios": [
             "1 oz Brandy",
             "1 oz Jamaican Rum",
@@ -931,21 +1001,24 @@ recipes = {
         ],
         "image": "default.jpg",
     },
-    "Americano": {
+    '69': {
+        "name": "Americano",
         "ratios": ["1 oz Campari", "1 oz Sweet Vermouth", "Splash of Soda Water"],
         "directions": "Build in a glass with ice and top with soda water.",
         "garnish": "Orange slice",
         "ingredients": ["Campari", "Sweet Vermouth"],
         "image": "default.jpg",
     },
-    "White Negroni": {
+    '70': {
+        "name": "White Negroni",
         "ratios": ["1 oz Gin", "1 oz Lillet Blanc", "3/4 oz Suze"],
         "directions": "Stir all ingredients with ice and strain into a chilled glass.",
         "garnish": "Lemon twist",
         "ingredients": ["Gin", "Aromatized White Wine", "Suze"],
         "image": "white_negroni.jpg",
     },
-    "Elder Fashion Royale": {
+    '71': {
+        "name": "Elder Fashion Royale",
         "ratios": [
             "2 oz Gin",
             "1/2 oz Elderflower Liqueur",
@@ -956,21 +1029,24 @@ recipes = {
         "ingredients": ["Gin", "Elderflower Liqueur", "Angostura Bitters"],
         "image": "default.jpg",
     },
-    "Kir": {
+    '72': {
+        "name": "Kir",
         "ratios": ["1/2 oz Crème de Cassis", "5 oz Dry White Wine"],
         "directions": "Pour crème de cassis into a wine glass and top with white wine.",
         "garnish": "None",
         "ingredients": ["Creme de Cassis", "White Wine"],
         "image": "default.jpg",
     },
-    "Kir Royale": {
+    '73': {
+        "name": "Kir Royale",
         "ratios": ["1/2 oz Crème de Cassis", "5 oz Champagne"],
         "directions": "Pour crème de cassis into a champagne flute and top with champagne.",
         "garnish": "None",
         "ingredients": ["Creme de Cassis", "Sparkling Wine"],
         "image": "default.jpg",
     },
-    "The Conference": {
+    '74': {
+        "name": "The Conference",
         "ratios": [
             "1/2 oz Rye Whiskey",
             "1/2 oz Bourbon Whiskey",
@@ -995,6 +1071,7 @@ recipes = {
     },
 }
 
+
 def getCocktails():
     return recipes
 
@@ -1009,3 +1086,123 @@ def addDefaultImages():
     print(clist)
 
 #addDefaultImages()
+
+
+
+def initCocktailsDB():
+    # This will ovewrite only entries that don't exist or are different.
+    client = datastore.Client()
+    all_recipes = getCocktails()
+
+    for recipeid in all_recipes.keys():
+        recipe_key = client.key('recipe', recipeid) # recipe table, recipe id.
+        recipe_entity = client.get(recipe_key)
+
+        if recipe_entity:
+            # update basic recipe info. excludes name, id, favs
+            recipe_entity['ratios'] = all_recipes[recipeid]['ratios']
+            recipe_entity['directions'] = all_recipes[recipeid]['directions']
+            recipe_entity['garnish'] = all_recipes[recipeid]['garnish']
+            recipe_entity['ingredients'] = all_recipes[recipeid]['ingredients']
+            recipe_entity['image'] = all_recipes[recipeid]['image']
+            client.put(recipe_entity)
+        else:
+            # create new entity for recipe
+            new_recipe = datastore.Entity(key=recipe_key)
+            new_recipe.update({
+                'name': all_recipes[recipeid]['name'],
+                'ratios': all_recipes[recipeid]['ratios'],
+                'directions': all_recipes[recipeid]['directions'],
+                'garnish': all_recipes[recipeid]['garnish'],
+                'ingredients': all_recipes[recipeid]['ingredients'],
+                'image': all_recipes[recipeid]['image'],
+                'favs': '0'
+            })
+            client.put(new_recipe)
+
+
+def getCocktailsFromDB():
+    client = datastore.Client()
+    query = client.query(kind='recipe')
+    results = list(query.fetch())
+    dictionary = {x.key.id_or_name: x for x in results}
+    return dictionary
+
+
+def initFavsDB():
+    # This will only add new users with an empty list.
+    client = datastore.Client()
+    users = getUsers()
+
+    for user in users:
+        user_key = client.key('favs', user) # favs table, user as the key id.
+        user_entity = client.get(user_key)
+        if user_entity:
+            # ignore, continue
+            pass
+        else:
+            # create new user fav list
+            new_user = datastore.Entity(key=user_key)
+            new_user.update({
+                'fav_list': []
+            })
+            client.put(new_user)
+
+def getFavsDB():
+    client = datastore.Client()
+    query = client.query(kind='favs')
+    results = list(query.fetch())
+    dictionary = {x.key.id_or_name: x for x in results}
+    return dictionary
+
+
+def getRecipe(id):
+    client = datastore.Client()
+    recipe_key = client.key('recipe', id) # recipe table, recipe id.
+    recipe_entity = client.get(recipe_key)
+    return recipe_entity
+
+
+def getFav(userid):
+    client = datastore.Client()
+    fav_key = client.key('favs', userid) # recipe table, recipe id.
+    fav_entity = client.get(fav_key)
+    if fav_entity:
+        # return fav list
+        return fav_entity
+    else:
+        # create new user fav list
+        new_user = datastore.Entity(key=fav_key)
+        new_user.update({
+            'fav_list': []
+        })
+        client.put(new_user)
+        return new_user
+
+def addRemoveFav(fav_entity, recipe_entity):
+    client = datastore.Client()
+    if recipe_entity.key.id_or_name in fav_entity['fav_list']:
+        fav_entity['fav_list'].remove(str(recipe_entity.key.id_or_name))
+        recipe_entity['favs'] = str(int(recipe_entity['favs']) - 1)
+    else:
+        fav_entity['fav_list'].append(str(recipe_entity.key.id_or_name))
+        recipe_entity['favs'] = str(int(recipe_entity['favs']) + 1)
+
+    client.put(fav_entity)
+    client.put(recipe_entity)
+    return fav_entity, recipe_entity
+    
+
+
+
+
+
+#### INITIALIZATION ####
+
+#initCocktailsDB()
+#initFavsDB()
+
+
+#print(recipes)
+#print(recipesDB[1].key.id_or_name)
+

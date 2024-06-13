@@ -39,6 +39,7 @@ body {
   display: flex;
   justify-content: center;
   background-color: #333;
+  gap: 15px
 }
 
 .navbar a {
@@ -59,6 +60,36 @@ body {
   padding: 20px;
 }
 
+
+/* Filtering Recipes */
+
+.filter-btn-container {
+  justify-content: center;
+  display: flex;
+  gap: 5px;
+}
+
+.filter-btn {
+  border: none;
+  color: rgb(39, 39, 39);
+  outline: none;
+  padding: 12px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+/* Add a light grey background on mouse-over */
+.filter-btn:hover {
+  background-color: #ddd;
+}
+
+/* Add a dark background to the active button */
+.filter-btn.active-filter {
+  background-color: #666;
+  color: white;
+}
+
+
 /* Recipe Grid */
 
 .recipes-grid {
@@ -75,13 +106,18 @@ body {
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.07);
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  position: relative;
 }
 .stocked-false {
   border: 2px solid darkred;
+}
+
+.recipe-hide {
+  display: none;
 }
 
 .recipe-image-container {
@@ -103,6 +139,31 @@ body {
   object-fit: cover;
   transform: translate(-50%, -50%);
 }
+
+.favorite {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(57, 57, 57, 0.2); /* Semi-transparent background */
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.fas, .far {
+  color: rgb(212, 13, 13);
+  font-size: 1.2em;
+  margin-right: 5px;
+  margin-left: 8px;
+}
+
+.favs-count {
+  font-size: 1em;
+  color: #333;
+}
+
+
 
 .recipe-info {
   flex: 1;
@@ -238,6 +299,10 @@ select {
     margin: 0 auto 20px auto; /* Center the image container and add margin */
     display: flex;
     justify-content: center; /* Center the image horizontally */
+  }
+
+  .favorite {
+    bottom: +10px;
   }
 
   .recipe-image {
