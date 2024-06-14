@@ -117,6 +117,7 @@ def gpt():
 
     dict_cocktail = {'name': 'Waiting for input...'}
 
+
     if request.method == 'POST':
         requested = request.form['text-input']
 
