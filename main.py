@@ -9,6 +9,7 @@ from data_functions import getStock, createStockDictionary, deleteStock, entityJ
 from config import Config
 import copy
 import json
+from gpt import getGPT
 
 app = Flask(__name__)
 
@@ -110,34 +111,29 @@ def recipepage():
 
     return render_template('recipes.html', user=current_user, recipes = recipes, favlist = favlist['fav_list'])
 
-#@app.route('/stockedrecipes')
-#@login_required
-#def stockedrecipespage():
-#    recipes = getCocktailsFromDB()
-#    stock = getStock(current_user.username)
-#    favlist = getFav(current_user.username)    #
-#
-#
-#    for rec in recipes.keys():
-#        recipes[rec]['stocked']=False
-#        have = []
-#        missing = []
-#        need = set(recipes[rec]['ingredients'])#
-#
-#        for ing in recipes[rec]['ingredients']:
-#            try:
-#                if stock[ing]['stocked'] is True:
-#                    have.append(ing)
-#                else:
-#                    missing.append(ing)
-#            except KeyError:
-#                missing.append(ing)
-#            
-#        if missing == []:
-#            recipes[rec]['stocked'] = True
-#        recipes[rec]['missing'] = missing#
-#
-#    return render_template('stockedrecipes.html', user=current_user, recipes = recipes, favlist = favlist['fav_list'])
+@app.route("/gpt", methods=['GET', 'POST'])
+@login_required
+def gpt():
+
+    dict_cocktail = {'name': 'Waiting for input...'}
+
+    if request.method == 'POST':
+        requested = request.form['text-input']
+
+        gptcocktail = getGPT(username=current_user.username, specialrequest=requested)
+        start = gptcocktail.find('{')
+        end = gptcocktail.find('}')+1
+        if gptcocktail == 'Not enough ingredients':
+            dict_cocktail = {'name': 'Too Few Ingredients In Stock', 'description': 'Add more ingredients to your stock, save, and try again'}
+        else:
+            try:
+                dict_cocktail = json.loads(gptcocktail[start:end])
+            except ValueError:  # includes simplejson.decoder.JSONDecodeError
+                dict_cocktail = {'name': 'Bad Generation, Try Again'}
+        return render_template('gpt.html', user=current_user, recipe = dict_cocktail)
+    
+    return render_template('gpt.html', user=current_user, recipe = dict_cocktail)
+
 
 @app.route("/logout")
 @login_required

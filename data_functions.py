@@ -3,6 +3,7 @@ from flask_login import UserMixin, login_required, login_user, logout_user, curr
 import json
 #import jsonify
 from database import getUsers, getIngredients, getCocktails
+import openai
 
 
 

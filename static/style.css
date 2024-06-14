@@ -189,10 +189,16 @@ body {
   font-size: 11pt;
 }
 
-.recipe-directions, .recipe-garnish {
+.recipe-directions, .recipe-garnish, .recipe-description {
   margin: 5px 0;
   font-size: .9em;
   color: #666;
+}
+
+.recipe-description {
+  font-style: italic;
+  margin-bottom: 10px;
+  margin-top: 0px;
 }
 
 .recipe-missing-ingredients {
@@ -206,6 +212,68 @@ body {
   font-size: 1em;
   color: green; 
 }
+
+/* GPT Page Styling */
+.gpt-container {
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.recipe-card-gpt {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  max-width: 500px;
+  justify-content: center;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  position: relative;
+}
+
+.gpt-intro-text {
+  text-align: center;
+  margin-bottom: 20px; /* Optional: Adjust spacing between text and card */
+}
+
+.generate-form {
+  text-align: center;
+  margin-bottom: 20px; /* Optional: Adjust spacing between form and card */
+}
+
+.generate-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.generate-form input[type="text"] {
+  width: 300px; /* Adjust width as needed */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+}
+.generate-form button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.generate-form button:hover {
+  background-color: #0056b3;
+}
+
+
+/* Ingredient Stock Styling */
 
 .ingredient-container {
   max-width: 600px;
@@ -292,6 +360,12 @@ select {
     flex-direction: column;
     text-align: center;
   }
+
+  .recipe-card-gpt {
+    flex-direction: column;
+    text-align: center;
+  }
+
 
   .recipe-image-container {
     width: 60%;

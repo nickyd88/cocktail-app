@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}DeFae Mixology{% endblock %}
+
+{% block content %}
+
+
+
+<div class="header">
+    <a href="/" class="logout-button">Logout</a>
+    <h1 class="page-title">{{ user.username }}'s Recipe Book</h1>
+</div>
+
+        {% include 'sub_navigation.html' %}
+
+        <div class="gpt-container">
+            <div class="gpt-intro-text">
+                Welcome to the DeFae GPT. I've generated the following cocktail for you based on your preferences.
+            </div>
+            <form id = "generate-form" class="generate-form" method="post">
+                <label for="text-input">What kind of cocktail would you like?</label>
+                <input type="text" id="text-input" name="text-input" maxlength="100" placeholder="Surprise me!">
+                <button id="gpt-button" type="submit" onclick="hideButton()">Create Cocktail</button>
+            </form>
+          
+            {% if recipe %}
+            <div class="recipe-card-gpt"> 
+
+                <div class="recipe-image-container">
+                    <img src="{{ url_for('static', filename='images/'+'default.jpg') }}" alt="{{ recipe.name }}" class = "recipe-image">
+                </div>    
+                <div class="recipe-info">
+                    <h2 class="recipe-title">{{ recipe.name }}</h2>
+
+                    <p class="recipe-description">{{ recipe.description }}</p>
+                    <ul class="recipe-ingredients">
+                        {% for item in recipe.ratios %}
+                        <li class="recipe-ingredients">{{item}}</li>
+                        {% endfor %}
+                    </ul>
+                    
+
+                    <p class="recipe-directions">{{ recipe.directions|safe }}</p>
+                    {% if recipe.garnish %}   
+                    <p class="recipe-garnish">Garnish: {{ recipe.garnish }}</p>
+                    {% endif %}
+
+                </div>
+      
+          </div>
+          {% endif %}
+        </div>
+
+        <script>
+            var form = document.getElementById("generate-form");
+            function hideButton() {
+                form.style.display="none";
+            }
+        </script>
+
+
+        
+    
+{% endblock %}
+
