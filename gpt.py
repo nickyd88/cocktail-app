@@ -27,14 +27,14 @@ def getGPT(username, specialrequest):
 
     client = OpenAI(api_key = getOAIkey())
     completion = client.chat.completions.create(
-        model= 'gpt-4o',  #"gpt-3.5-turbo",
+        model= 'gpt-3.5-turbo',  #"gpt-3.5-turbo",
         messages=[
             {"role": "system",
             "content": '''
                 You are a mixologist at a nice cocktail bar. You are an avid reader of liquor.com and own the savoy cocktail manual and bartenders bible.
 
                 In this conversation, I will provide prompts that are a list of ingredients you must work with, and a list of cocktails that I know I like.
-                You will respond with a string that can be converted to a Python Dictionary in the following format, recommending a new cocktail for me that I may have never seen before.
+                You will respond with a string that can be converted to a Python dictionary or json in the following format, recommending a new cocktail for me that I may have never seen before.
                 Do
                 Use this format, here are some examples:
 
@@ -47,11 +47,39 @@ def getGPT(username, specialrequest):
 "3/4 oz Lime Juice",
 ],
 "directions": "Shake with ice and double strain into a chilled up-glass",
-"garnish": "Lime wheel",
-"ingredients": ["Gin", "Green Chartreuse", "Lime Juice", "Cherry Liqueur"],
+"garnish": "Lime wheel"
 }
-
+and
 {
+"name": "Pisco Sour",
+"ratios": [
+    "2 oz Pisco",
+    "1 oz Lemon Juice",
+    "3/4 oz Simple Syrup",
+    "1 egg white",
+],
+"directions": "Dry shake (without ice), then shake with ice and strain into a chilled cocktail glass",
+"garnish": "Angostura Bitters"
+}
+                Include "description": "A brief 1 sentence describing the cocktail and inspiration" and "glass type": "the type of glass that should be used".
+                The cocktail should be well balanced. Use famous bartenders like Phil Ward or Joaquin Simo or Anders Erickson for inspiration.
+                '''
+            },
+            {"role": "user", "content": '''
+            Suggest a new cocktail for me to make based on my tastes. A list of some of my favorite cocktails are: 
+            ''' + ''.join(str(x)+', ' for x in favlist) + '''. The ingredients I have are '''+''.join(str(x)+', ' for x in stocked)+' and egg white. A special request: '+specialrequest
+            }
+        ]
+    )
+
+    return completion.choices[0].message.content
+
+#gptcocktail = getGPT(username='Nick', specialrequest="surprise me")
+
+
+#print(gptcocktail)
+
+drink = '''{
 "name": "Monte Cassino",
 "ratios": [
 "3/4 oz Rye Whiskey",
@@ -66,27 +94,25 @@ def getGPT(username, specialrequest):
 "Benedictine",
 "Yellow Chartreuse",
 "Lemon Juice",
-]
-}
-
-                You should also include "description": "A brief 1 sentence describing the cocktail and inspiration" and "glass type": "the type of glass that should be used".
-                Only suggest Mezcal at most a quarter of the time unless specifically requested for smoke.
-                The cocktail should be well balanced. If serving in a coupe or nick and nora glass, there should be at most 3-4 oz of total wet ingredients.
-                '''
-            },
-            {"role": "user", "content": '''
-            Suggest a new cocktail for me to make based on my tastes. A list of some of my favorite cocktails are: 
-            ''' + ''.join(str(x)+', ' for x in favlist) + '''. The ingredients I have are '''+''.join(str(x)+', ' for x in stocked)+' special requests: '+specialrequest
-            }
-        ]
-    )
-
-    return completion.choices[0].message.content
-
-#gptcocktail = getGPT(username='Nick', specialrequest="surprise me")
+],
+"glass": 'coupe glass'
+}'''
 
 
-#print(gptcocktail)
+
+testingfunction = '''
+client = OpenAI(api_key = getOAIkey())
+
+response = client.images.generate(
+    model="dall-e-3",
+    prompt='arealistic, simple photo of a single cocktail on a table. No other bottles or glasses or anything else on the the table. just the cocktail. keep in mind the glass parameter from the cocktail, and the name and color of the ingredients: '+drink,
+    size='1024x1792',
+    quality='standard',
+    n=1
+)
+
+print(response.data[0].url)
+'''
 
 
 old = '''

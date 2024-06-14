@@ -12,9 +12,9 @@
 
         {% include 'sub_navigation.html' %}
 
-        <div class="gpt-container">
+        <div class="generate-cocktail-container">
             <div class="gpt-intro-text">
-                Welcome to the DeFae GPT. I've generated the following cocktail for you based on your preferences.
+                Welcome to the DeFae GPT, mixology AI.
             </div>
             <form id = "generate-form" class="generate-form" method="post">
                 <label for="text-input">What kind of cocktail would you like?</label>
@@ -50,12 +50,6 @@
           {% endif %}
         </div>
 
-        <script>
-            var form = document.getElementById("generate-form");
-            function hideButton() {
-                form.style.display="none";
-            }
-        </script>
 
 
         

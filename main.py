@@ -122,15 +122,23 @@ def gpt():
         requested = request.form['text-input']
 
         gptcocktail = getGPT(username=current_user.username, specialrequest=requested)
-        start = gptcocktail.find('{')
-        end = gptcocktail.find('}')+1
         if gptcocktail == 'Not enough ingredients':
             dict_cocktail = {'name': 'Too Few Ingredients In Stock', 'description': 'Add more ingredients to your stock, save, and try again'}
         else:
+            
+            ## Some weird text formatting issue resolution ##
+            
+            gptcocktail = repr(gptcocktail.strip())
+            gptcocktail = gptcocktail.replace(r'\n',r'')
+            gptcocktail = gptcocktail.replace(r',}',r'}')
+            gptcocktail = gptcocktail.replace(r',]',r']')
+            gptcocktail = gptcocktail.replace(r"\'",r"'")
+            start = gptcocktail.find('{')
+            end = gptcocktail.find('}')+1
             try:
                 dict_cocktail = json.loads(gptcocktail[start:end])
             except ValueError:  # includes simplejson.decoder.JSONDecodeError
-                dict_cocktail = {'name': 'Bad Generation, Try Again'}
+                dict_cocktail = {'name': 'Bad Generation, Try Again', "directions": repr(gptcocktail[start:end])}
         return render_template('gpt.html', user=current_user, recipe = dict_cocktail)
     
     return render_template('gpt.html', user=current_user, recipe = dict_cocktail)

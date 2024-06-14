@@ -214,7 +214,7 @@ body {
 }
 
 /* GPT Page Styling */
-.gpt-container {
+.generate-cocktail-container {
   display: grid;
   place-items: center;
   grid-template-columns: 1fr;
